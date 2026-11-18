@@ -1,0 +1,6 @@
+$kind: collection
+name: Estoque API
+description: 'API de controle de estoque - endpoints para gerenciamento de produtos.'
+variables:
+  - key: base_url
+    value: 'http://localhost:3000'
