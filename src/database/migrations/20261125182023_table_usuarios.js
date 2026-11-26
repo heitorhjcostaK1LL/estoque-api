@@ -1,7 +1,7 @@
 export function up(knex) {
  
   return knex.schema.createTable('usuarios', function (table) {
-    table.increments('id');
+    table.increments();
     table.string('nome', 50);
     table.string('login',20)
     table.string('senha',100)

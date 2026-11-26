@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import db from './src/database/database.js'
 
 import {loggerMiddleware} from './src/middleware/index.js'
 import express, { json, urlencoded } from 'express';
@@ -50,8 +49,36 @@ app.delete('/produtos/:id',(req,res) => {
         "mensagem": `O produto ${id} foi alterado! Nome: ${produto.nome}, Valor: ${produto.preco}`
 
     })
+
+    
     //res.send(`O produto ${id} foi deletado!`)
 })
+
+app.get('/usuarios', (req, res) => {
+
+    db('usuarios').select('*')
+        .then((usuarios) => {
+
+            res.status(200).json({
+                "status": "OK",
+                "codigo": 200,
+                "mensagem": usuarios
+            });
+
+        })
+        .catch(() => {
+
+            console.log('Erro ao consultar os usuários');
+
+            res.status(500).json({
+                "status": "Erro",
+                "codigo": 500,
+                "mensagem": "Erro ao consultar os usuários"
+            });
+
+        });
+
+});
 
 app.listen(port, function(){
     console.log('Servidor rodando na porta'  + port)

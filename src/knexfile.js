@@ -1,5 +1,7 @@
 import dotenv from 'dotenv'
-dotenv.config();
+import {fileURLToPath} from 'node:url';
+
+dotenv.config({ path: fileURLToPath(new URL('../.env',import.meta.url))});
 
 export default {
     development :{
@@ -10,12 +12,15 @@ export default {
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME
         },
+        pool: {
+            min:2,
+            max:10
+        },
         migrations: {
             directory:'./database/migrations'
         },
         seeds: {
             directory: '.database/seeds/dev',
-        
         
         }
     }
